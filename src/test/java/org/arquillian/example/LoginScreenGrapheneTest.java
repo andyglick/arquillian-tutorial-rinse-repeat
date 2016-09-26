@@ -41,7 +41,7 @@ public class LoginScreenGrapheneTest {
     @ArquillianResource
     private URL deploymentUrl;
 
-    @FindBy(id="loginForm:userName")                                     // 1. injects an element by default location strategy ("idOrName")
+    @FindBy(id="loginForm:userName")            // 1. injects an element by default location strategy ("idOrName")
     private WebElement userName;
 
     @FindBy(id="loginForm:password")
