@@ -28,6 +28,9 @@
         <graphene.version>2.1.0.Final</graphene.version>
         <jetty.distro.version>9.3.0.M1</jetty.distro.version>
         <maven.version>3.3.9</maven.version>
+
+        <phantomjs.binary.path>/usr/local/bin/phantomjs</phantomjs.binary.path>
+
         <shrinkwrap.version>1.2.6</shrinkwrap.version>
         <shrinkwrap.descriptors.version>2.0.0-alpha-10</shrinkwrap.descriptors.version>
         <shrinkwrap.resolver.version>2.2.4</shrinkwrap.resolver.version>
@@ -727,10 +730,31 @@
                 <plugin>
                     <artifactId>maven-surefire-plugin</artifactId>
                     <version>${surefire.version}</version>
+                    <configuration>
+                        <skipTests>true</skipTests>
+                    </configuration>
                 </plugin>
             </plugins>
         </pluginManagement>
         <plugins>
+
+            <plugin>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>${surefire.version}</version>
+                <executions>
+                    <execution>
+                        <id>integration-test</id>
+                        <goals>
+                            <goal>integration-test</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <systemPropertyVariables>
+                        <phantomjs.binary.path>${phantomjs.binary.path}</phantomjs.binary.path>
+                    </systemPropertyVariables>
+                </configuration>
+            </plugin>
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

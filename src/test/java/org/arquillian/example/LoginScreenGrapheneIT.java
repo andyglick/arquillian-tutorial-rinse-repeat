@@ -32,7 +32,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 @RunWith(Arquillian.class)
-public class LoginScreenGrapheneTest {
+public class LoginScreenGrapheneIT {
     private static final String WEBAPP_SRC = "src/main/webapp";
 
     @Drone
@@ -69,7 +69,6 @@ public class LoginScreenGrapheneTest {
                 .addAsWebInfResource(
                         new StringAsset("<faces-config version=\"2.0\"/>"),
                         "faces-config.xml");
-
     }
 
     @Test
