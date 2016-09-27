@@ -21,15 +21,20 @@
 
     <properties>
         <arquillian.version>1.1.11.Final</arquillian.version>
-        <arquillian.drone.version>2.0.1.Final</arquillian.drone.version>
+        <drone.version>2.0.1.Final</drone.version>
 
         <browser>phantomjs</browser>
 
         <graphene.version>2.1.0.Final</graphene.version>
+        <java.version>1.8</java.version>
         <jetty.distro.version>9.3.0.M1</jetty.distro.version>
+
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
         <maven.version>3.3.9</maven.version>
 
-        <phantomjs.binary.path>/usr/local/bin/phantomjs</phantomjs.binary.path>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
         <shrinkwrap.version>1.2.6</shrinkwrap.version>
         <shrinkwrap.descriptors.version>2.0.0-alpha-10</shrinkwrap.descriptors.version>
@@ -46,6 +51,13 @@
 
     <dependencyManagement>
         <dependencies>
+
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>4.12</version>
+                <scope>test</scope>
+            </dependency>
 
             <dependency>
                 <groupId>org.jboss.spec</groupId>
@@ -132,7 +144,7 @@
             <dependency>
                 <groupId>org.jboss.modules</groupId>
                 <artifactId>jboss-modules</artifactId>
-                <version>1.3.7.Final</version>
+                <version>1.5.2.Final</version>
             </dependency>
             <dependency>
                 <groupId>xml-apis</groupId>
@@ -349,38 +361,38 @@
             <dependency>
                 <groupId>org.jboss.arquillian.extension</groupId>
                 <artifactId>arquillian-drone-api</artifactId>
-                <version>${arquillian.drone.version}</version>
+                <version>${drone.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.jboss.arquillian.extension</groupId>
                 <artifactId>arquillian-drone-browserstack-extension</artifactId>
-                <version>${arquillian.drone.version}</version>
+                <version>${drone.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.jboss.arquillian.extension</groupId>
                 <artifactId>arquillian-drone-configuration</artifactId>
-                <version>${arquillian.drone.version}</version>
+                <version>${drone.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.jboss.arquillian.extension</groupId>
                 <artifactId>arquillian-drone-impl</artifactId>
-                <version>${arquillian.drone.version}</version>
+                <version>${drone.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.jboss.arquillian.extension</groupId>
                 <artifactId>arquillian-drone-selenium-server</artifactId>
-                <version>${arquillian.drone.version}</version>
+                <version>${drone.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>org.jboss.arquillian.extension</groupId>
                 <artifactId>arquillian-drone-spi</artifactId>
-                <version>${arquillian.drone.version}</version>
+                <version>${drone.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.jboss.arquillian.extension</groupId>
                 <artifactId>arquillian-drone-webdriver</artifactId>
-                <version>${arquillian.drone.version}</version>
+                <version>${drone.version}</version>
             </dependency>
 
             <dependency>
@@ -430,6 +442,18 @@
                 <dependencies>
 
                     <dependency>
+                        <groupId>org.jboss.logmanager</groupId>
+                        <artifactId>jboss-logmanager</artifactId>
+                        <version>2.0.4.Final</version>
+                    </dependency>
+
+                    <dependency>
+                        <groupId>org.wildfly.common</groupId>
+                        <artifactId>wildfly-common</artifactId>
+                        <version>1.2.0.Beta1</version>
+                    </dependency>
+
+                    <dependency>
                         <groupId>javax.validation</groupId>
                         <artifactId>validation-api</artifactId>
                         <version>1.0.0.GA-redhat-3</version>
@@ -438,7 +462,7 @@
                     <dependency>
                         <groupId>org.osgi</groupId>
                         <artifactId>org.osgi.core</artifactId>
-                        <version>5.0.0</version>
+                        <version>6.0.0</version>
                     </dependency>
 
                     <dependency>
@@ -476,8 +500,7 @@
                     <dependency>
                         <groupId>org.jboss.msc</groupId>
                         <artifactId>jboss-msc</artifactId>
-                        <version>1.1.6.Final-redhat-1</version>
-                        <!--<version>1.2.6.Final-redhat-1</version>-->
+                        <version>1.2.7.Final</version>
                     </dependency>
                     <dependency>
                         <groupId>org.jboss.osgi.spi</groupId>
@@ -501,6 +524,16 @@
                     <groupId>org.jboss.as</groupId>
                     <artifactId>jboss-as-arquillian-container-managed</artifactId>
                     <version>7.5.9.Final-redhat-2</version>
+                </dependency>
+                <!--<dependency>-->
+                    <!--<groupId>org.wildfly</groupId>-->
+                    <!--<artifactId>wildfly-jsf-injection</artifactId>-->
+                    <!--<version>10.1.0.Final</version>-->
+                <!--</dependency>-->
+                <dependency>
+                    <groupId>org.jboss.as</groupId>
+                    <artifactId>jboss-as-jsf-injection</artifactId>
+                    <version>7.5.10.Final-redhat-2</version>
                 </dependency>
             </dependencies>
         </profile>
@@ -577,6 +610,12 @@
         <dependency>
             <groupId>javax.enterprise</groupId>
             <artifactId>cdi-api</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
         </dependency>
 
         <dependency>
@@ -679,13 +718,6 @@
         </dependency>
 
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.12</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
             <groupId>org.jboss.arquillian.junit</groupId>
             <artifactId>arquillian-junit-container</artifactId>
             <version>${arquillian.version}</version>
@@ -751,7 +783,7 @@
                 </executions>
                 <configuration>
                     <systemPropertyVariables>
-                        <phantomjs.binary.path>${phantomjs.binary.path}</phantomjs.binary.path>
+                        <phantomjs.binary.path>target/drone-phantomjs</phantomjs.binary.path>
                     </systemPropertyVariables>
                 </configuration>
             </plugin>

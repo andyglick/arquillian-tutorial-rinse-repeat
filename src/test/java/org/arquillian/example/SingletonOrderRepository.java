@@ -29,6 +29,7 @@ import javax.ejb.Singleton;
 /**
  * @author <a href="http://community.jboss.org/people/dan.j.allen">Dan Allen</a>
  */
+@SuppressWarnings("WeakerAccess")
 @Singleton
 @Lock(LockType.READ)
 public class SingletonOrderRepository implements OrderRepository {
@@ -52,6 +53,6 @@ public class SingletonOrderRepository implements OrderRepository {
     
     @PostConstruct
     void initialize() {
-        orders = new ArrayList<List<String>>();
+        orders = new ArrayList<>();
     }
 }

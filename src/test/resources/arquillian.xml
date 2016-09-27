@@ -12,13 +12,13 @@
     <!-- Uncomment the <engine> element to instruct Arquillian to write the archives for each test to the target location
          on disk before deploying them to the server. -->
 
-    <engine>
-        <property name="deploymentExportPath">target/deployments</property>
-    </engine>
+    <!--<engine>-->
+        <!--<property name="deploymentExportPath">target/deployments</property>-->
+    <!--</engine>-->
 
     <extension qualifier="webdriver">
         <property name="browser">phantomjs</property>
-        <property name="remoteReusable">true</property>
+        <!--<property name="remoteReusable">true</property>-->
     </extension>
 
     <container qualifier="jbossas-managed" default="true">

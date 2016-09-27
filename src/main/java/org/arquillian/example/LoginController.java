@@ -41,8 +41,10 @@ public class LoginController implements Serializable {
 
     public boolean isRenderedLoggedIn() {
         if(currentUser != null) {
+            System.out.println("LOGIN SUCCEEDED");
             return renderedLoggedIn;
         } else {
+            System.out.println("LOGIN FAILED");
             return false;
         }
     }
